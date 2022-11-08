@@ -2,17 +2,22 @@ package starter.pages;
 
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.swing.*;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class BasePageObject extends PageObject {
+import static io.ous.jtoml.impl.Token.TokenType.Key;
 
+public class BasePageObject extends PageObject {
     int timeout = 15;
 
     public void wait(int wait) {
@@ -37,6 +42,12 @@ public class BasePageObject extends PageObject {
         waitUntil(ExpectedConditions.visibilityOfElementLocated(element), timeout);
         getDriver().findElement(element).sendKeys(text);
     }
+
+    public void typeClear(By element, String text) {
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(element), timeout);
+        getDriver().findElement(element).clear();
+    }
+
 
     public boolean isPresent(By element) {
         return getDriver().findElement(element).isDisplayed();
